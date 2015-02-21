@@ -2,6 +2,6 @@ module FunkyApiClient
   class Base
     include Virtus.model
     include ActiveModel::Validations
-    extend FunkyApiClient::ApiCalls
+    include FunkyApiClient::ApiCalls
   end
 end
