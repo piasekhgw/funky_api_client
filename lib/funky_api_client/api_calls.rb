@@ -16,7 +16,7 @@ module FunkyApiClient
             query: params.stringify_keys.slice(*path_parser.ruote_keys),
             headers: headers
           )
-          handle_class_call_response(response)
+          handle_class_call_response(response, plain_response)
         end
       end
 

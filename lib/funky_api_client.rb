@@ -11,6 +11,11 @@ module FunkyApiClient
   autoload :PathParser, 'funky_api_client/path_parser'
 
   module ResponseHandlers
-    autoload :ClassCallHandler,  'funky_api_client/response_handlers/class_call_handler'
+    autoload :ClassCallHandler, 'funky_api_client/response_handlers/class_call_handler'
+  end
+
+  module Errors
+    autoload :RecordNotFoundError, 'funky_api_client/errors/record_not_found_error'
+    autoload :GenericError, 'funky_api_client/errors/generic_error'
   end
 end
