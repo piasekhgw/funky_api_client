@@ -19,13 +19,17 @@ describe FunkyApiClient::PathParser do
     context 'when passed params are invalid' do
       context 'when no route params passed' do
         it 'raises invalid params exception' do
-          expect { path_parser.call(other_attr: 123) }.to raise_error(RuntimeError, 'Invalid params')
+          expect { path_parser.call(other_attr: 123) }.to(
+            raise_error(FunkyApiClient::Errors::InvalidParamsError)
+          )
         end
       end
 
       context 'when not all ruote params passed' do
         it 'raises invalid params exception' do
-          expect { path_parser.call(other_attr: 123, id: 123) }.to raise_error(RuntimeError, 'Invalid params')
+          expect { path_parser.call(other_attr: 123, id: 123) }.to(
+            raise_error(FunkyApiClient::Errors::InvalidParamsError)
+          )
         end
       end
     end

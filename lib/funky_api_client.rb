@@ -17,5 +17,6 @@ module FunkyApiClient
   module Errors
     autoload :RecordNotFoundError, 'funky_api_client/errors/record_not_found_error'
     autoload :GenericError, 'funky_api_client/errors/generic_error'
+    autoload :InvalidParamsError, 'funky_api_client/errors/invalid_params_error'
   end
 end
