@@ -19,4 +19,12 @@ module FunkyApiClient
     autoload :GenericError, 'funky_api_client/errors/generic_error'
     autoload :InvalidParamsError, 'funky_api_client/errors/invalid_params_error'
   end
+
+  def self.backend_url=(url)
+    @backend_url = url
+  end
+
+  def self.backend_url
+    @backend_url
+  end
 end
