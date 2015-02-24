@@ -1,7 +1,10 @@
 module FunkyApiClient
   class HttpRequest
+    include HTTParty
+    headers 'Content-Type' => 'application/json'
+
     def self.perform(method_type, relative_path, query: {}, body: {}, headers: {})
-      HTTParty.public_send(
+      public_send(
         method_type,
         full_path(relative_path),
         query: query,
