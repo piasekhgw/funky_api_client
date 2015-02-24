@@ -12,6 +12,7 @@ module FunkyApiClient
 
   module ResponseHandlers
     autoload :ClassCallHandler, 'funky_api_client/response_handlers/class_call_handler'
+    autoload :InstanceCallHandler, 'funky_api_client/response_handlers/instance_call_handler'
   end
 
   module Errors
