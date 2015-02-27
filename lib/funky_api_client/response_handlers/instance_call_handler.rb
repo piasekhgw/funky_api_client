@@ -8,7 +8,8 @@ module FunkyApiClient
 
       private
 
-      def assign_errors(errors)
+      def assign_errors(response_errors)
+        self.response_errors = response_errors
       end
     end
   end
