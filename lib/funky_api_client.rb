@@ -1,7 +1,7 @@
 require 'funky_api_client/version'
 require 'virtus'
 require 'active_support/concern'
-require 'active_support/core_ext/hash/keys'
+require 'active_support/core_ext/hash'
 require 'httparty'
 
 module FunkyApiClient

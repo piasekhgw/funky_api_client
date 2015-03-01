@@ -14,7 +14,7 @@ module FunkyApiClient
           response = FunkyApiClient::HttpRequest.perform(
             :get,
             path_parser.call(params),
-            query: params.stringify_keys.slice(*path_parser.ruote_keys),
+            query: params.stringify_keys.except(*path_parser.ruote_keys),
             headers: headers
           )
           handle_class_call_response(response, plain_response)
@@ -27,7 +27,7 @@ module FunkyApiClient
           response = FunkyApiClient::HttpRequest.perform(
             method_type,
             path_parser.call(params),
-            query: params.stringify_keys.slice(*path_parser.ruote_keys),
+            query: params.stringify_keys.except(*path_parser.ruote_keys),
             body: serialization_method_name ? send(serialization_method_name) : nil,
             headers: headers
           )
