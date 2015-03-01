@@ -19,18 +19,17 @@ module FunkyApiClient
         elsif parsed_response.is_a?(Hash)
           new(parsed_response)
         end
+      rescue JSON::ParserError
+        raise FunkyApiClient::Errors::GenericError
       end
 
       def handle_class_call_error_response(response)
-        parsed_response = JSON.parse(response.body)
-        case parsed_response['error']
-        when 'not_found'
+        case response.code
+        when 404
           raise FunkyApiClient::Errors::RecordNotFoundError
         else
           raise FunkyApiClient::Errors::GenericError
         end
-      rescue JSON::ParserError
-        raise FunkyApiClient::Errors::GenericError
       end
     end
   end

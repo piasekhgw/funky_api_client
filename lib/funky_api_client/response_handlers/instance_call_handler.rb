@@ -2,8 +2,13 @@ module FunkyApiClient
   module ResponseHandlers
     module InstanceCallHandler
       def handle_instance_call_response(response)
-        assign_errors(JSON.parse(response['body'])['errors']) if response.code == 422
-        response.success?
+        return true if response.success?
+        if response.code == 422
+          assign_errors(JSON.parse(response.body)['errors'])
+          false
+        else
+          raise FunkyApiClient::Errors::GenericError
+        end
       end
 
       private
