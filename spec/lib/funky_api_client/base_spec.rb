@@ -12,7 +12,7 @@ class Foo < FunkyApiClient::Base
   attribute :bars, Array[Bar]
 
   def data_to_save
-    { id: id, name: name }.to_json
+    { name: name }.to_json
   end
 end
 
@@ -113,7 +113,7 @@ describe FunkyApiClient::Base do
   end
 
   describe 'instance call' do
-    let(:request_body) { { id: 1, name: 'n1' } }
+    let(:request_body) { { name: 'n1' } }
     let(:foo) { Foo.new(id: 1, name: 'n1') }
 
     describe 'parameters passing' do
@@ -129,7 +129,7 @@ describe FunkyApiClient::Base do
           body: request_body.to_json,
           headers: { test_header: 'test_value' }
         )
-        foo.save(params: { id: 1, test: 1 }, headers: { test_header: 'test_value' })
+        foo.save(params: { id: foo.id, test: 1 }, headers: { test_header: 'test_value' })
       end
     end
 
@@ -137,10 +137,10 @@ describe FunkyApiClient::Base do
       context 'when successful response' do
         before { stub_request(:post, save_url).with(body: request_body.to_json).to_return(status: 200) }
         it 'returns true' do
-          expect(foo.save(params: { id: 1 })).to eq(true)
+          expect(foo.save(params: { id: foo.id })).to eq(true)
         end
         it 'has no response_errors (valid? method returns true)' do
-          foo.save(params: { id: 1 })
+          foo.save(params: { id: foo.id })
           expect(foo.response_errors).to eq([])
           expect(foo.valid?).to eq(true)
         end
@@ -155,10 +155,10 @@ describe FunkyApiClient::Base do
             )
           end
           it 'returns false' do
-            expect(foo.save(params: { id: 1 })).to eq(false)
+            expect(foo.save(params: { id: foo.id })).to eq(false)
           end
           it 'sets response_errors (valid? method returns false)' do
-            foo.save(params: { id: 1 })
+            foo.save(params: { id: foo.id })
             expect(foo.response_errors).to eq(['error_message1', 'error_message2'])
             expect(foo.valid?).to eq(false)
           end
@@ -167,7 +167,7 @@ describe FunkyApiClient::Base do
         context 'when response status is other than 422' do
           before { stub_request(:post, save_url).with(body: request_body.to_json).to_return(status: 500) }
           it 'raises generic error' do
-            expect { foo.save(params: { id: 1 }) }.to raise_error(FunkyApiClient::Errors::GenericError)
+            expect { foo.save(params: { id: foo.id }) }.to raise_error(FunkyApiClient::Errors::GenericError)
           end
         end
       end
