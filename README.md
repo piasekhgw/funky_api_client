@@ -63,4 +63,4 @@ end
 car = Car.new(brand: 'Audi', color: 'red')
 car.create # returns true if response successful, otherwise false
 ```
-If response status was 422 and response json was like `{"errors":["brand is invalid"]}` then `car` has `response_errors` set.
+If response status was 422 and response json was like `{"errors": ["brand is invalid"]}` then `car` has `response_errors` set.
